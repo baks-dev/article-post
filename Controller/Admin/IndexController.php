@@ -46,7 +46,7 @@ final class IndexController extends AbstractController
     ): Response
     {
 
-        dd('/admin/article/posts/{page<\d+>}');
+        return new Response('/admin/article/posts/{page<\d+>}');
 
         // Поиск
         $search = new SearchDTO();
