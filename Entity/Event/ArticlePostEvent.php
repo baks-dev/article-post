@@ -66,22 +66,12 @@ class ArticlePostEvent extends EntityEvent
     #[ORM\Column(type: ArticlePostUid::TYPE, nullable: false)]
     private ?ArticlePostUid $main = null;
 
-    /** One To One */
-    //#[ORM\OneToOne(mappedBy: 'event', targetEntity: ArticlePostLogo::class, cascade: ['all'])]
-    //private ?ArticlePostOne $one = null;
 
     /**
      * Модификатор
      */
-    #[ORM\OneToOne(mappedBy: 'event', targetEntity: ArticlePostModify::class, cascade: ['all'])]
+    #[ORM\OneToOne(targetEntity: ArticlePostModify::class, mappedBy: 'event', cascade: ['all'])]
     private ArticlePostModify $modify;
-
-    /**
-     * Переводы
-     */
-    //#[ORM\OneToMany(mappedBy: 'event', targetEntity: ArticlePostTrans::class, cascade: ['all'])]
-    //private Collection $translate;
-
 
     public function __construct()
     {
