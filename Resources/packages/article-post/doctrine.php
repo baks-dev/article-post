@@ -23,6 +23,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use BaksDev\Article\Post\BaksDevArticlePostBundle;
 use BaksDev\Article\Post\Type\Event\ArticlePostEventType;
 use BaksDev\Article\Post\Type\Event\ArticlePostEventUid;
 use BaksDev\Article\Post\Type\Id\ArticlePostType;
@@ -37,11 +38,9 @@ return static function(ContainerConfigurator $container, DoctrineConfig $doctrin
 
     $emDefault = $doctrine->orm()->entityManager('default')->autoMapping(true);
 
-    $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
-
     $emDefault->mapping('article-post')
         ->type('attribute')
-        ->dir($MODULE.'Entity')
+        ->dir(BaksDevArticlePostBundle::PATH.'Entity')
         ->isBundle(false)
         ->prefix('BaksDev\Article\Post')
         ->alias('products-product');
