@@ -23,19 +23,15 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-// use App\Module\Product\Type\Category\Id\CategoryUidConverter;
-// use BaksDev\Users\Entity\User;
-// use App\Module\Product\Entity;
-// use App\Module\Product\EntityListeners;
-
 use BaksDev\Article\Post\BaksDevArticlePostBundle;
+use BaksDev\Reference\Gender\BaksDevReferenceGenderBundle;
 
-return static function (ContainerConfigurator $configurator) {
+return static function(ContainerConfigurator $configurator) {
+
     $services = $configurator->services()
         ->defaults()
         ->autowire()
-        ->autoconfigure()
-    ;
+        ->autoconfigure();
 
 
     $NAMESPACE = BaksDevArticlePostBundle::NAMESPACE;
@@ -46,6 +42,5 @@ return static function (ContainerConfigurator $configurator) {
             $PATH.'{Entity,Resources,Type}',
             $PATH.'**/*Message.php',
             $PATH.'**/*DTO.php',
-        ])
-    ;
+        ]);
 };
