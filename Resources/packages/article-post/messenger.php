@@ -31,8 +31,8 @@ return static function (FrameworkConfig $framework) {
 
     $messenger
         ->transport('article-post')
-        ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
-        ->options(['queue_name' => 'article-post'])
+        ->dsn('redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%?auto_setup=true')
+        ->options(['stream' => 'article-post'])
         ->failureTransport('failed-article-post')
         ->retryStrategy()
         ->maxRetries(3)
@@ -43,7 +43,27 @@ return static function (FrameworkConfig $framework) {
 
     ;
 
-    $messenger->transport('failed-article-post')
+
+
+
+    $messenger
+        ->transport('article-post')
+        ->dsn('redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%?auto_setup=true')
+        ->options(['stream' => 'article-post'])
+        ->failureTransport('failed-article-post')
+        ->retryStrategy()
+        ->maxRetries(3)
+        ->delay(1000)
+        ->maxDelay(0)
+        ->multiplier(3)
+        ->service(null)
+
+    ;
+
+
+    $failure = $framework->messenger();
+
+    $failure->transport('failed-article-post')
         ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
         ->options(['queue_name' => 'failed-article-post'])
     ;
