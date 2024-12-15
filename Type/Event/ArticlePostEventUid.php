@@ -34,7 +34,7 @@ final class ArticlePostEventUid extends Uid
 
     public const TEST = '0188a99f-03ce-7df6-8775-19226c67fd66';
 
-    public const TYPE = 'particle_post_event';
+    public const string TYPE = 'particle_post_event';
 
 
 }

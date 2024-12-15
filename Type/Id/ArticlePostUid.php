@@ -33,7 +33,7 @@ final class ArticlePostUid extends Uid
 {
     public const TEST = '0188a99f-03ce-7df6-8775-19226c67fd66';
 
-    public const TYPE = 'article_post';
+    public const string TYPE = 'article_post';
 
 
 }
